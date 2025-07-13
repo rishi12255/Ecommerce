@@ -1,8 +1,11 @@
 import React from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import { NavLink, useNavigate } from 'react-router';
 
 function NavBar() {
+
+  const navigate = useNavigate();
   return (
     <>
       <div className="border shadow-2xl border-white bg-white flex flex-wrap items-center justify-between px-4 py-2 h-auto rounded-lg">
@@ -10,8 +13,9 @@ function NavBar() {
       
         <div className="flex gap-1 items-center ">
          
-          <img src="mains.png" alt="Logo" className=" h-16 w-16 sm:h-20 mix-blend-multiply" />
-          
+      
+                  <img src="mains.png" alt="Logo" className=" h-16 w-16 sm:h-20 mix-blend-multiply" />
+           
           
           <div className="flex ">
             <p className="text-red-500 text-2xl sm:text-3xl font-bold">Street</p>
@@ -36,7 +40,8 @@ function NavBar() {
 
           
           <div className="text-xl">
-            <FaCartShopping />
+            <FaCartShopping 
+            onClick={()=>navigate("/cart")}/>
           </div>
         </div>
       </div>
