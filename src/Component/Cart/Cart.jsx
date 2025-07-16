@@ -1,17 +1,22 @@
-import React from 'react'
-import { NavLink } from 'react-router'
+import React from "react";
+import NavBar from "../NavBar/NavBar";
+import CartCard from "./Component/CardCart";
+import { useState } from "react";
 
 const Cart = () => {
-   let data = localStorage.getItem("cart1");
-  console.log("data from cart", data);
-  return (
-    <div>
-      hello cart
-       <NavLink to={"/"}>
-       <div className="border bg-red-500 border-red-500 hover:bg-red-900 h-12  w-fit p-2">Back TO home</div>
-        </NavLink>     
-    </div>
-  )
-}
+  let data = localStorage.getItem("cart1");
+  const[cartData, setCartData]=useState(JSON.parse(data));
 
-export default Cart
+  return (
+    <div className="p-2 px-5">
+      <NavBar />
+      <div className="mx-5  space-y-5">
+        {cartData.map((item) => (
+          <CartCard data={item} key={item.id} setCartData={setCartData} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Cart;

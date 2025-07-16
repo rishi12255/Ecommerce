@@ -2,6 +2,7 @@ import React from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { NavLink, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 function NavBar() {
 
@@ -14,7 +15,10 @@ function NavBar() {
         <div className="flex gap-1 items-center ">
          
       
+                 
+                  <Link to="/">
                   <img src="mains.png" alt="Logo" className=" h-16 w-16 sm:h-20 mix-blend-multiply" />
+                  </Link>
            
           
           <div className="flex ">
