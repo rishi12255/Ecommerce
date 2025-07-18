@@ -1,6 +1,6 @@
 const AddToCart = (productData) => {
    productData.quantity = 1;
-  console.log("item to be added in cart",productData);
+ 
 
   let localData = localStorage.getItem("cart1");
 
