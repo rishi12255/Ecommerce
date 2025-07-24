@@ -11,7 +11,7 @@ const ButtonCard = ({ cartBoolean, ...props }) => {
         ${cartBoolean ? 'bg-green-600 hover:bg-green-700' : 'bg-red-700 hover:bg-red-800'}
       `}
     >
-      <FaCartShopping className="w-5 h-5" />
+      <FaCartShopping className="w-5 h-5 " />
       <span>{cartBoolean ? "Added to cart " : "Add to Cart"}</span>
     </button>
   );

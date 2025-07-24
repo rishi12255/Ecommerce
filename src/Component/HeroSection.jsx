@@ -2,22 +2,36 @@ import React from 'react';
 
 function HeroSection() {
   return (
-    <div className="m-3">
-      <div className="bg-[url('/we.jpg')] bg-cover bg-center bg-no-repeat rounded-lg h-[600px] sm:h-[700px] md:h-[750px] flex items-center px-4">
-        <div className="max-w-4xl w-full text-white p-4 sm:p-8 md:p-12 lg:p-16 rounded-lg">
+    <div className="relative rounded-lg overflow-hidden m-3">
+      
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          className="w-full h-full object-cover"
+          src="/pizzaesbg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        {/* Fallback background if video fails */}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center justify-center min-h-[600px] sm:min-h-[700px] md:min-h-[750px] px-4 py-10">
+        <div className="text-center max-w-3xl w-full text-white p-4 sm:p-6 md:p-8 lg:p-12">
           
-          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            Freshness in Every Bite
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-xl">
+            Delicious Moments Delivered
+          </h1>
+
+          <p className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-medium drop-shadow-sm text-white">
+            Savor the taste of freshly prepared meals made with love and the finest ingredients. Fast delivery. Irresistible flavor. No compromises.
           </p>
 
-          
-          <p className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-medium text-white text-justify max-w-2xl">
-            From farm to fork, every dish is crafted with premium ingredients and bursting with flavor. Whether you're looking for a hearty meal, a healthy bite, or a sweet treat, we've got something for every craving. Explore our menu and taste the difference of real freshness and culinary care.
-          </p>
-
-          
-          <button className="mt-6 sm:mt-8 text-white bg-green-500 hover:bg-green-700 text-base sm:text-lg md:text-xl px-6 py-3 rounded-lg transition duration-300">
-            Discover Now
+          <button className="mt-6 bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base md:text-lg px-6 sm:px-8 py-2 sm:py-3 rounded-full transition duration-300 shadow-md hover:shadow-lg">
+            Order Now
           </button>
         </div>
       </div>

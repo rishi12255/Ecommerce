@@ -7,7 +7,7 @@ const Quantity = ({ data, setCartData }) => {
     <div className="flex items-center justify-center sm:justify-start gap-6 text-sm sm:text-base">
       
       <button
-        className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 active:bg-red-700 transition-all duration-200 ease-in-out font-bold cursor-pointer"
+        className="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 active:bg-red-700 transition-all duration-200 ease-in-out font-bold cursor-pointer"
         onClick={() => subQuantity(data, setCartData)}
         aria-label="Decrease quantity"
       >
@@ -19,7 +19,7 @@ const Quantity = ({ data, setCartData }) => {
 
       {/* Increase Button */}
       <button
-        className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 active:bg-green-700 transition-all duration-200 ease-in-out font-semibold cursor-pointer"
+        className="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 active:bg-green-700 transition-all duration-200 ease-in-out font-semibold cursor-pointer"
         onClick={() => addQuantity(data, setCartData)}
         aria-label="Increase quantity"
       >

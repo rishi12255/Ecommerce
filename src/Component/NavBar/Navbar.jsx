@@ -1,55 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { NavLink, useNavigate } from 'react-router';
+import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
 
 function NavBar() {
-
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <>
-      <div className="border shadow-2xl border-white bg-white flex flex-wrap items-center justify-between px-4 py-2 h-auto rounded-lg">
-        
-      
-        <div className="flex gap-1 items-center ">
-         
-      
-                 
-                  <Link to="/">
-                  <img src="mains.png" alt="Logo" className=" h-16 w-16 sm:h-20 mix-blend-multiply" />
-                  </Link>
-           
-          
-          <div className="flex ">
-            <p className="text-red-500 text-2xl sm:text-3xl font-bold">Street</p>
-            <p className="text-green-700 text-2xl sm:text-3xl font-bold">Hunt</p>
+    <nav className="w-full bg-white shadow-lg border border-white rounded-lg px-4 py-3">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+
+        {/* Logo & Title */}
+        <div className="flex items-center gap-2">
+          <Link to="/">
+            <img src="mains.png" alt="Logo" className="h-10 sm:h-12 w-auto mix-blend-multiply" />
+          </Link>
+          <div className="flex">
+            <p className="text-red-500 text-xl sm:text-2xl font-bold">Street</p>
+            <p className="text-green-700 text-xl sm:text-2xl font-bold">Hunt</p>
           </div>
         </div>
 
-        
-        <div className="flex items-center gap-4 mt-2 sm:mt-0">
-          
-         
-          <div className="flex items-center border rounded-lg overflow-hidden">
-            <input
-              type="text"
-              placeholder="Search"
-              className="h-10 w-32 sm:w-40 px-2 outline-none"
-            />
-            <button className="bg-gray-200 px-3 h-10 flex items-center justify-center">
-              <FaSearch />
-            </button>
+        {/* Hamburger Menu (Mobile) */}
+        <div className="sm:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-2xl text-gray-700"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+
+        {/* Nav Items */}
+        <div
+          className={`w-full sm:w-auto ${
+            menuOpen ? "block" : "hidden"
+          } sm:flex items-center gap-4`}
+        >
+          {/* Mobile View: Search + Cart side-by-side */}
+          <div className="sm:hidden flex justify-between items-center gap-2 mt-3">
+            {/* Search */}
+            <div className="flex flex-1 items-center border rounded-lg overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search"
+                className="h-10 w-full px-3 outline-none"
+              />
+              <button className="bg-gray-100 px-3 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                <FaSearch />
+              </button>
+            </div>
+
+            {/* Cart Icon */}
+            <div
+              className="text-2xl text-gray-700 hover:text-green-600 cursor-pointer"
+              onClick={() => navigate("/cart")}
+            >
+              <FaCartShopping />
+            </div>
           </div>
 
-          
-          <div className="text-xl">
-            <FaCartShopping 
-            onClick={()=>navigate("/cart")}/>
+          {/* Desktop View: Search + Cart */}
+          <div className="hidden sm:flex items-center gap-4">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search"
+                className="h-10 w-full sm:w-48 md:w-56 px-3 outline-none"
+              />
+              <button className="bg-gray-100 px-3 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                <FaSearch />
+              </button>
+            </div>
+
+            <div
+              className="text-xl text-gray-700 hover:text-green-600 cursor-pointer"
+              onClick={() => navigate("/cart")}
+            >
+              <FaCartShopping />
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </nav>
   );
 }
 

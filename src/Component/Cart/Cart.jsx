@@ -1,35 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import CartCard from "./Component/CardCart";
-import { useState } from "react";
 import OrangeButton from "../Product/component/OrangeButton";
 import totalAmount from "../ComponentFunction/totalAmount";
 import CheckOutModal from "./Component/CheckOutModal";
 
 const Cart = () => {
-  const[visible,setVisible]=useState(false);
-  let data = localStorage.getItem("cart1");
-  const[cartData, setCartData]=useState(JSON.parse(data) || [])
-  ;
+  const [visible, setVisible] = useState(false);
+  const data = localStorage.getItem("cart1");
+  const [cartData, setCartData] = useState(JSON.parse(data) || []);
 
   return (
-    <div className="p-2 px-5 flex-col flex h-[100vh] ">
-      <NavBar />
-      <div className="mx-5  space-y-5 flex-1 overflow-auto">
-        {cartData.map((item) => (
-          <CartCard data={item} key={item.id} setCartData={setCartData} />
-        ))}
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Sticky Navbar */}
+      <div className="sticky top-0 z-50 bg-white shadow-md">
+        <NavBar />
       </div>
-      <div className="flex justify-between items-center p-2 mx-5 border-gray-300 ">
-          <div>
-          <OrangeButton title={"Check Out"} onClick={()=>setVisible(true)}/>
+
+      {/* Scrollable Cart Items */}
+      <div className="flex-1 overflow-auto px-4 py-6 space-y-4 sm:px-8">
+        {cartData.length === 0 ? (
+          <div className="text-center text-gray-500 text-xl font-semibold mt-10">
+            Your cart is empty 🛒
+          </div>
+        ) : (
+          cartData.map((item) => (
+            <CartCard key={item.id} data={item} setCartData={setCartData} />
+          ))
+        )}
+      </div>
+
+      {/* Sticky Checkout Section */}
+      <div className="sticky bottom-0 z-50 bg-white border-t border-gray-300 px-4 py-4 flex flex-col sm:flex-row justify-between items-center shadow-inner">
+        <OrangeButton title="Check Out" onClick={() => setVisible(true)} />
+        <div className="text-xl font-semibold text-green-700 mt-4 sm:mt-0">
+          Total Amount: <span className="text-black">₹ {totalAmount(cartData)}</span>
         </div>
-        <div className="flex text-green-600 font-bold text-2xl">
-        <div> Total Amount:</div>
-        <div>${totalAmount(cartData)} </div>
       </div>
-      </div>
-      <CheckOutModal  visible={visible} setVisible={setVisible} />
+
+      {/* Modal */}
+      <CheckOutModal visible={visible} setVisible={setVisible} cartData={cartData} />
     </div>
   );
 };
