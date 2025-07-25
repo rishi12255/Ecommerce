@@ -1,7 +1,7 @@
 // App.jsx
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import NavBar from './Component/NavBar/NavBar';
+import Navbar from './Component/NavBar/Navbar';
 import HeroSection from './Component/HeroSection';
 import Categories from './Component/Categories';
 import Footer from './Component/Footer';
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className='pt-20'>
-      <NavBar searchText={searchText} setSearchText={setSearchText}/>
+      <Navbar searchText={searchText} setSearchText={setSearchText}/>
       <HeroSection />
       <Categories setProductData={setProductData} mainData={mainData} />
       <div ref={productRef}>
