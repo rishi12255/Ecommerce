@@ -1,21 +1,19 @@
-import React, { useRef } from 'react'
+import React from 'react';
 
-const TextInput = ({label, placeholder, ref, err}) => {
-  
+const TextInput = React.forwardRef(({ label, placeholder, err }, ref) => {
   return (
-  <div className=""> 
-    <div className="font-semibold text-gray-700 text-sm ">{label}:</div>
-    <input className={`border  w-full ${err ? "border-red-400" :  "border-gray-500"} bg-slate-50 rounded-sm p-1 px-2 placeholder-black`} placeholder={placeholder}
-    ref={ref}/>
-
-    <div className="h-5 text-xs text-red-500 px-2">
-     {err && "Please enter a valid input!!"}  
+    <div>
+      <label className="text-sm font-semibold text-gray-700">{label}</label>
+      <input
+        ref={ref}
+        placeholder={placeholder}
+        className={`mt-1 w-full p-2 rounded-md border ${
+          err ? 'border-red-500' : 'border-gray-300'
+        } bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400`}
+      />
+      {err && <p className="text-xs text-red-500 mt-1">Please enter a valid {label.toLowerCase()}!</p>}
     </div>
+  );
+});
 
-    
-</div>
-  )
-  
-}
-
-export default TextInput
+export default TextInput;

@@ -1,54 +1,35 @@
-import React, { useRef } from 'react'
-import TextInput from '../../InputFields/TextInput'
-import OrangeButton from  '../../Product/component/OrangeButton'
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useRef, useState } from 'react';
+import TextInput from '../../InputFields/TextInput';
+import OrangeButton from '../../Product/component/OrangeButton';
+import { useNavigate } from 'react-router';
 
 const UserDetails = () => {
   const navigate = useNavigate();
-   const [err, setErr] = useState(0);
-    const name = useRef();
-    const phone =useRef();
-    const address = useRef();
+  const [err, setErr] = useState(0);
+  const name = useRef();
+  const phone = useRef();
+  const address = useRef();
 
+  const handleProceed = () => {
+    if (!name.current?.value || name.current.value.length < 3) return setErr(1);
+    if (!phone.current?.value || phone.current.value.length < 10) return setErr(2);
+    if (!address.current?.value) return setErr(3);
 
-    const handleProceed =() =>{
-
-        console.log("Name:",name.current?.value);
-        console.log("Phone:",phone.current?.value);
-        console.log("Address:",address.current?.value);
-        if (name.current?.value== "" || name.current.value == null || name.current.value.length<3){
-            setErr(1);
-        }
-        else if(phone.current?.value=="" || phone.current.value.length<10){
-            setErr(2);
-                }
-                else if(address.current?.value == ""){
-                    setErr(3);
-                }
-                else{
-                    setErr(0);
-                    alert("Oder placed Sucessfully");
-      localStorage.removeItem("cart1");
-      navigate("/");
-
-                }
-      };
-      
-
+    setErr(0);
+    alert("Order placed successfully!");
+    localStorage.removeItem("cart1");
+    navigate("/");
+  };
 
   return (
-    <div>
-      <TextInput label={"Name"} placeholder={"Enter a Name"} ref={name} err={err==1 && true} />
-      <TextInput label={"Number"} placeholder={"Enter a PhoneNumber"} ref={phone} err={err==2 && true}/>
-      <TextInput label={"Address"} placeholder={"Enter a  Address"} ref={address} err={err==3 && true} />
+    <div className="space-y-4 mt-4">
+      <TextInput label="Name" placeholder="Enter your name" ref={name} err={err === 1} />
+      <TextInput label="Phone Number" placeholder="Enter phone number" ref={phone} err={err === 2} />
+      <TextInput label="Address" placeholder="Enter delivery address" ref={address} err={err === 3} />
 
-      <div>
-        <OrangeButton title={"Proceed"}  onClick= {()=> handleProceed()}/>
-      </div>
-
+      <OrangeButton title="Place Order" onClick={handleProceed} />
     </div>
-  )
-}
+  );
+};
 
-export default UserDetails
+export default UserDetails;

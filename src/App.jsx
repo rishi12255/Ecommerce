@@ -1,32 +1,41 @@
-import { useState } from 'react'
-
-import NavBar from './Component/NavBar/Navbar'
-import HeroSection from './Component/HeroSection'
-import Categories from './Component/Categories'
-import Footer from './Component/Footer'
-import Product from './Component/Product/Product' 
-import { useEffect } from 'react'
-import productDataApi from './Component/Api/productData.api'
-
+// App.jsx
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import NavBar from './Component/NavBar/NavBar';
+import HeroSection from './Component/HeroSection';
+import Categories from './Component/Categories';
+import Footer from './Component/Footer';
+import Product from './Component/Product/Product';
+import productDataApi from './Component/Api/productData.api';
 
 function App() {
- const [mainData, setMainData] = useState([]);
+  const [mainData, setMainData] = useState([]);
   const [productData, setProductData] = useState([]);
-   useEffect(() => {
-     productDataApi(setMainData, setProductData);
-   }, []);
-   console.log("main data", mainData);
+  const location = useLocation();
+  const productRef = useRef(null);
+    const [searchText, setSearchText] = useState("");
 
+  useEffect(() => {
+    productDataApi(setMainData, setProductData);
+  }, []);
+
+  useEffect(() => {
+    if (location.state?.scrollToProduct && productRef.current) {
+      productRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
 
   return (
-    <>
-     <NavBar/>
-     <HeroSection/>
-     <Categories setProductData={setProductData} mainData={mainData}/>
-     <Product productData={productData}/>
-     <Footer/>
-    </>
-  )
+    <div className='pt-20'>
+      <NavBar searchText={searchText} setSearchText={setSearchText}/>
+      <HeroSection />
+      <Categories setProductData={setProductData} mainData={mainData} />
+      <div ref={productRef}>
+        <Product productData={productData} searchText={searchText}/>
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;

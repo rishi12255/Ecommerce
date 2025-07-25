@@ -36,7 +36,7 @@ const Categories = ({ mainData, setProductData }) => {
           >
             <div
               className={`p-3 rounded-full border-2 bg-white shadow-md transition-transform duration-300
-          text-gray-600 group-hover:text-orange-500 ${
+          text-gray-600 group-hover:text-green-500 ${
   pick === item.name ? "text-gray-500" : ""
 }
 `}
@@ -49,7 +49,7 @@ const Categories = ({ mainData, setProductData }) => {
             </div>
             <p
               className={`mt-3 text-sm sm:text-base font-semibold transition-colors
-          text-gray-600 group-hover:text-orange-500 ${
+          text-gray-600 group-hover:text-green-500 ${
   pick === item.name ? "text-gray-500" : ""
 }
 `}
