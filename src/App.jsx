@@ -1,4 +1,3 @@
-// App.jsx
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Component/NavBar/Navbar';
@@ -8,34 +7,44 @@ import Footer from './Component/Footer';
 import Product from './Component/Product/Product';
 import productDataApi from './Component/Api/productData.api';
 
+
 function App() {
   const [mainData, setMainData] = useState([]);
   const [productData, setProductData] = useState([]);
-  const location = useLocation();
+  const [searchText, setSearchText] = useState("");
   const productRef = useRef(null);
-    const [searchText, setSearchText] = useState("");
+  const location = useLocation();
+
 
   useEffect(() => {
-    productDataApi(setMainData, setProductData);
+    productDataApi(setProductData, setMainData);
   }, []);
+
 
   useEffect(() => {
     if (location.state?.scrollToProduct && productRef.current) {
       productRef.current.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState({}, document.title);
     }
   }, [location]);
 
+
   return (
     <div className='pt-20'>
-      <Navbar searchText={searchText} setSearchText={setSearchText}/>
+      <Navbar searchText={searchText} setSearchText={setSearchText} />
       <HeroSection />
-      <Categories setProductData={setProductData} mainData={mainData} />
+      <Categories
+        setProductData={setProductData}
+        mainData={mainData}
+        scrollToMenuRef={productRef}
+      />
       <div ref={productRef}>
-        <Product productData={productData} searchText={searchText}/>
+        <Product productData={productData} searchText={searchText} />
       </div>
       <Footer />
     </div>
   );
 }
 
-export default App;
+
+export default App; 

@@ -1,6 +1,6 @@
 // Cart.jsx
 import React, { useState } from "react";
-import NavBar from "../NavBar/NavBar";
+import Navbar from "../NavBar/Navbar";
 import CartCard from "./Component/CardCart";
 import OrangeButton from "../Product/component/OrangeButton";
 import totalAmount from "../ComponentFunction/totalAmount";
@@ -17,7 +17,7 @@ const Cart = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <div className="sticky top-0 z-50 bg-white shadow-md">
-        <NavBar />
+        <Navbar />
       </div>
 
       <div className="flex-1 overflow-auto px-4 py-6 space-y-4 sm:px-8">

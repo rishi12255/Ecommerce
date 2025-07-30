@@ -28,9 +28,9 @@ const CardCart = ({ data, setCartData }) => {
           {/* Product Info */}
           <div className="flex flex-col justify-between w-full text-center sm:text-left">
             <div className="mb-4 space-y-2">
-              <h3 className="text-xl sm:text-2xl font-bold text-green-700">{data.name}</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{data.name}</h3>
               {data.tags?.[0] && (
-                <span className="inline-block text-xs sm:text-sm text-green-800 bg-green-100 rounded-full px-3 py-1 font-medium shadow-sm">
+                <span className="inline-block text-xs sm:text-sm text-gray-600 bg-green-100 rounded-full px-3 py-1 font-medium shadow-sm">
                   {data.tags[0]}
                 </span>
               )}
@@ -47,7 +47,7 @@ const CardCart = ({ data, setCartData }) => {
               <Quantity data={data} setCartData={setCartData} />
 
               {/* Price */}
-              <div className="text-lg sm:text-xl font-bold text-green-600 tracking-wide">
+              <div className="text-lg sm:text-xl font-bold text-gray-900 tracking-wide">
                 ₹ {data.caloriesPerServing}
               </div>
             </div>

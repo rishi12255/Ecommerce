@@ -2,22 +2,34 @@ import React, { useState } from "react";
 
 const icons = [
   { name: "All", src: "./Icons/pizza1.png" },
+  { name: "Breakfast", src: "./Icons/breakfast.png" },
+  { name: "Snack", src: "./Icons/snack.png" },
   { name: "Lunch", src: "./Icons/hamburger.png" },
   { name: "Dessert", src: "./Icons/ice-cream.png" },
   { name: "Dinner", src: "./Icons/noodle.png" },
   { name: "Beverage", src: "./Icons/drink.png" },
 ];
 
-const Categories = ({ mainData, setProductData }) => {
-  const [pick, setPick] = useState("All");
+const Categories = ({ mainData, setProductData, scrollToMenuRef }) => {
+  const [pick, setPick] = useState("");
 
   const setCategories = (category) => {
     setPick(category);
+
     if (category === "All") {
       setProductData(mainData);
     } else {
-      const filtered = mainData.filter((item) => item.mealType[0] === category);
+      // FILTER: only items whose FIRST mealType matches category exactly
+      const filtered = mainData.filter(
+        (item) =>
+          item.mealType?.[0]?.toLowerCase() === category.toLowerCase()
+      );
       setProductData(filtered);
+    }
+
+    // Optional: Scroll to product section after click
+    if (scrollToMenuRef?.current) {
+      scrollToMenuRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -35,11 +47,13 @@ const Categories = ({ mainData, setProductData }) => {
             className="flex flex-col items-center cursor-pointer group transition-all duration-300"
           >
             <div
-              className={`p-3 rounded-full border-2 bg-white shadow-md transition-transform duration-300
-          text-gray-600 group-hover:text-green-500 ${
-  pick === item.name ? "text-gray-500" : ""
-}
-`}
+              className={`p-3 rounded-full border-2 shadow-md transition-transform duration-300
+                ${
+                  pick === item.name
+                    ? "border-green-600 bg-green-100"
+                    : "border-gray-300 bg-white hover:bg-red-100 hover:border-red-500"
+                }
+              `}
             >
               <img
                 src={item.src}
@@ -49,10 +63,12 @@ const Categories = ({ mainData, setProductData }) => {
             </div>
             <p
               className={`mt-3 text-sm sm:text-base font-semibold transition-colors
-          text-gray-600 group-hover:text-green-500 ${
-  pick === item.name ? "text-gray-500" : ""
-}
-`}
+                ${
+                  pick === item.name
+                    ? "text-green-600"
+                    : "text-gray-700 group-hover:text-red-500"
+                }
+              `}
             >
               {item.name}
             </p>

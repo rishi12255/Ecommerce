@@ -50,7 +50,7 @@ const ProductModal = ({
             >
               {data.name}
             </h2>
-            <p className="text-md sm:text-lg text-green-600 font-semibold">
+            <p className="text-md sm:text-lg text-gray-900 font-semibold">
               ₹ {data.caloriesPerServing}
             </p>
           </div>

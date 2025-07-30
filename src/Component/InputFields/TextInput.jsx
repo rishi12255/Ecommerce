@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = React.forwardRef(({ label, placeholder, err }, ref) => {
+const TextInput =({ label, placeholder, err , ref ,errormessage}) => {
   return (
     <div>
       <label className="text-sm font-semibold text-gray-700">{label}</label>
@@ -11,9 +11,11 @@ const TextInput = React.forwardRef(({ label, placeholder, err }, ref) => {
           err ? 'border-red-500' : 'border-gray-300'
         } bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400`}
       />
-      {err && <p className="text-xs text-red-500 mt-1">Please enter a valid {label.toLowerCase()}!</p>}
+     <div className="text-xs text-red-500 mt-1">
+      {err && ( <span>{errormessage ? errormessage:"please provide a valid input"}</span>)}
+        </div>
     </div>
   );
-});
+};
 
 export default TextInput;

@@ -17,10 +17,9 @@ const Card = ({ data }) => {
   // Manually apply star color without using array
   const getStar = (index) => (
     <FaStar
+      key={index}
       className={
-        data.rating >= index
-          ? 'text-yellow-500'
-          : 'text-gray-300'
+        data.rating >= index ? 'text-yellow-500' : 'text-gray-300'
       }
     />
   );
@@ -28,26 +27,30 @@ const Card = ({ data }) => {
   return (
     <>
       <div
-        className="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden"
+        className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden"
         onClick={() => setShowModal(true)}
       >
         {/* Image */}
         <img
           src={data.image}
           alt={data.name}
-          className="w-full h-48 object-cover"
+          className="w-full h-44 sm:h-48 md:h-52 lg:h-56 xl:h-64 object-cover"
         />
 
         {/* Info */}
-        <div className="p-4 space-y-2">
+        <div className="p-3 sm:p-4 space-y-2">
           {/* Meal Type */}
-          <h3 className="text-gray-700 font-semibold text-sm uppercase tracking-wide">{data.mealType[0]}</h3>
+          <h3 className="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wider">
+            {data.mealType[0]}
+          </h3>
 
           {/* Title */}
-          <p className="text-lg font-bold text-gray-800">{data.name}</p>
+          <p className="text-base sm:text-lg font-semibold text-gray-900 line-clamp-2">
+            {data.name}
+          </p>
 
           {/* Rating */}
-          <div className="flex items-center gap-1 text-sm">
+          <div className="flex items-center gap-1 text-sm sm:text-base">
             <span className="text-gray-600">{data.rating}</span>
             <div className="flex gap-0.5">
               {getStar(1)}
@@ -60,7 +63,7 @@ const Card = ({ data }) => {
 
           {/* Price & Button */}
           <div className="flex items-center justify-between pt-2">
-            <span className="text-sm font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md shadow-sm">
+            <span className="text-xs sm:text-sm font-bold text-gray-900 bg-green-100 px-2 py-1 rounded-md shadow-sm">
               ₹ {data.caloriesPerServing}
             </span>
             <div onClick={(e) => e.stopPropagation()}>
